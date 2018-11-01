@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<script type="module">
+  import icon from './icon.js'
+  customElements.define('my-icon', icon)
+</script>
+
+<style>
+  my-icon {
+    margin: 0 0.5em
+  }
+</style>
+
+<body>
+  <div>
+    <my-icon prefix="far" iconName="heart"></my-icon>
+    <my-icon prefix="fas" iconName="heart"></my-icon>
+
+
+    <h3>Sizes </h3>
+
+
+    <my-icon prefix="fas" iconName="heart" size="xs"></my-icon><br />
+    <my-icon prefix="fas" iconName="heart" size="sm"></my-icon><br />
+    <my-icon prefix="fas" iconName="heart" size="lg"></my-icon><br />
+    <my-icon prefix="fas" iconName="heart" size="2x"></my-icon><br />
+    <my-icon prefix="fas" iconName="heart" size="3x"></my-icon><br />
+    <my-icon prefix="fas" iconName="heart" size="4x"></my-icon><br />
+    <my-icon prefix="fas" iconName="heart" size="5x"></my-icon><br />
+    <my-icon prefix="fas" iconName="heart" size="6x"></my-icon><br />
+    <my-icon prefix="fas" iconName="heart" size="7x"></my-icon><br />
+    <my-icon prefix="fas" iconName="heart" size="8x"></my-icon><br />
+    <my-icon prefix="fas" iconName="heart" size="9x"></my-icon><br />
+    <my-icon prefix="fas" iconName="heart" size="10x"></my-icon><br />
+
+
+    <h3>Fixed Width</h3>
+
+
+    <my-icon prefix="fas" iconName="home"></my-icon><br />
+    <my-icon prefix="fas" iconName="info"></my-icon><br />
+    <my-icon prefix="fas" iconName="book"></my-icon><br />
+    <my-icon prefix="fas" iconName="pencil-alt"></my-icon><br />
+    <my-icon prefix="fas" iconName="cog" fixedWidth></my-icon><br />
+
+    <p>vs.</p>
+
+    <my-icon prefix="fas" iconName="home" fixedWidth></my-icon><br />
+    <my-icon prefix="fas" iconName="info" fixedWidth></my-icon><br />
+    <my-icon prefix="fas" iconName="book" fixedWidth></my-icon><br />
+    <my-icon prefix="fas" iconName="pencil-alt" fixedWidth></my-icon><br />
+    <my-icon prefix="fas" iconName="cog" fixedWidth></my-icon><br />
+
+
+    <h3>Borders & Pulled Icons</h3>
+
+
+    <my-icon prefix="fas" iconName="quote-left" size="2x" border pull-left></my-icon>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla possimus velit dolores libero aspernatur?
+    Repellendus ab, voluptatem praesentium eveniet error totam cupiditate tempora at nesciunt quia odit voluptatibus et
+    eum.
+    Gatsby believed in the green light, the orgastic future that year by year recedes before us.
+    It eluded us then, but that’s no matter — tomorrow we will run faster, stretch our arms further...
+    And one fine morning — So we beat on, boats against the current, borne back ceaselessly into the past.
+
+
+    <h3>Animated Icons</h3>
+
+
+    <my-icon prefix="fas" iconName="spinner" size="3x" spin></my-icon>
+    <my-icon prefix="fas" iconName="circle-notch" size="3x" spin></my-icon>
+    <my-icon prefix="fas" iconName="sync" size="3x" spin></my-icon>
+    <my-icon prefix="fas" iconName="cog" size="3x" spin></my-icon>
+    <my-icon prefix="fas" iconName="spinner" size="3x" pulse></my-icon>
+
+
+    <h3>Scaling</h3>
+
+
+    <my-icon class="color-background" prefix="fas" iconName="magic" size="4x" scale=50></my-icon>
+    <my-icon class="color-background" prefix="fas" iconName="magic" size="4x" scale=100></my-icon>
+    <my-icon class="color-background" prefix="fas" iconName="magic" size="4x" scale=120></my-icon>
+
+
+    <h3>Rotating</h3>
+
+
+    <my-icon prefix="fas" iconName="magic" size="4x" rotate=-90></my-icon>
+    <my-icon prefix="fas" iconName="magic" size="4x"></my-icon>
+    <my-icon prefix="fas" iconName="magic" size="4x" rotate=90></my-icon>
+    <my-icon prefix="fas" iconName="magic" size="4x" rotate=120></my-icon>
+    <my-icon prefix="fas" iconName="magic" size="4x" rotate=180></my-icon>
+
+
+    <h3>Positioning</h3>
+
+
+    <my-icon class="color-background" prefix="fas" iconName="magic" size="4x" scale=50></my-icon>
+    <my-icon class="color-background" prefix="fas" iconName="magic" size="4x" scale=50 translateX=-6></my-icon>
+    <my-icon class="color-background" prefix="fas" iconName="magic" size="4x" scale=50 translateY=-6></my-icon>
+    <my-icon class="color-background" prefix="fas" iconName="magic" size="4x" scale=50 translateX=6></my-icon>
+    <my-icon class="color-background" prefix="fas" iconName="magic" size="4x" scale=50 translateY=6></my-icon>
+
+
+    <h3>Flipping</h3>
+
+
+    <my-icon prefix="fas" iconName="magic" size="4x"></my-icon>
+    <my-icon prefix="fas" iconName="magic" size="4x" flipX></my-icon>
+    <my-icon prefix="fas" iconName="magic" size="4x" flipY></my-icon>
+    <my-icon prefix="fas" iconName="magic" size="4x" flipY flipX></my-icon>
+
+
+    <h3>Flipping</h3>
+
+
+    <my-icon prefix="fas" iconName="pencil-alt" size="4x" maskPrefix="fas" maskName="comment" scale=50 translateY=-0.5></my-icon>
+    <my-icon prefix="fab" iconName="facebook-f" size="4x" maskPrefix="fas" maskName="circle" scale=80 translateY=1.6
+      translateX=1.25></my-icon>
+    <my-icon prefix="fas" iconName="headphones" size="4x" maskPrefix="fas" maskName="square" scale=70></my-icon>
+  </div>
+</body>
+
+</html>
