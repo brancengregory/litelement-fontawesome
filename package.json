@@ -1,20 +1,26 @@
 {
-  "name": "litelement-fontawesome-icon",
+  "name": "litelement-fontawesome",
   "version": "1.0.0",
   "main": "index.js",
   "author": "Daniel Panero",
   "license": "MIT",
+  "repository": {
+    "url": "https://github.com/DaniPani/litelement-fontawesome/"
+  },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.7",
-    "@fortawesome/free-brands-svg-icons": "^5.4.2",
-    "@fortawesome/free-regular-svg-icons": "^5.4.2",
-    "@fortawesome/free-solid-svg-icons": "^5.4.2",
     "@polymer/lit-element": "^0.6.2"
   },
   "devDependencies": {
+    "@fortawesome/free-brands-svg-icons": "^5.4.2",
+    "@fortawesome/free-regular-svg-icons": "^5.4.2",
+    "@fortawesome/free-solid-svg-icons": "^5.4.2",
     "babel-eslint": "^10.0.1",
     "eslint": "^5.8.0",
-    "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.14.0"
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^8.0.0",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.0"
   }
 }
