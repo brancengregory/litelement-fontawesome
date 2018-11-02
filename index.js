@@ -1,180 +1,171 @@
-import { LitElement, html } from '@polymer/lit-element';
-import { library, icon, dom } from '@fortawesome/fontawesome-svg-core';
+import { LitElement, html } from '@polymer/lit-element'
+import { icon, dom, parse } from '@fortawesome/fontawesome-svg-core'
 
 export default class extends LitElement {
   constructor() {
-    super();
-    this.prefix = 'fas';
-    this.size = '1x';
-    this.fixedWidth = false;
-    this.border = false;
-    this.pullLeft = false;
-    this.pullRight = false;
-    this.spin = false;
-    this.pulse = false;
-    this.scale = 100;
-    this.rotate = 0;
-    this.translateX = 0;
-    this.translateY = 0;
-    this.flipX = false;
-    this.flipY = false;
+    super()
+    this.border = false
+    this.className = ''
+    this.mask = null
+    this.fixedWidth = false
+    this.inverse = false
+    this.flip = null
+    this.icon = null
+    this.listItem = false
+    this.pull = null
+    this.pulse = false
+    this.rotation = null
+    this.size = null
+    this.spin = false
+    this.symbol = false
+    this.title = ''
+    this.transform = null
   }
 
   static get properties() {
     return {
-      prefix: {
-        type: String,
-      },
-      iconName: {
-        type: String,
-      },
-      size: {
-        type: String,
-      },
-      fixedWidth: {
-        type: Boolean,
-      },
       border: {
-        type: Boolean,
+        type: Boolean
       },
-      pullLeft: {
-        type: Boolean,
+
+      className: {
+        type: String
       },
-      pullRight: {
-        type: Boolean,
+
+      mask: {
+        type: value => {
+          if (typeof value === 'object' && value.prefix && value.iconName) {
+            return value
+          }
+          if (Array.isArray(value) && value.length === 2) {
+            const [prefix, iconName] = value
+            return { prefix, iconName }
+          }
+          if (typeof value === 'string') {
+            return { prefix: 'fas', iconName: value }
+          }
+          return null
+        }
       },
-      spin: {
-        type: Boolean,
+
+      fixedWidth: {
+        type: Boolean
       },
+
+      inverse: {
+        type: String
+      },
+
+      flip: {
+        type: String
+      },
+
+      icon: {
+        type: value => {
+          if (typeof value === 'object' && value.prefix && value.iconName) {
+            return value
+          }
+          if (Array.isArray(value) && value.length === 2) {
+            const [prefix, iconName] = value
+            return { prefix, iconName }
+          }
+          if (typeof value === 'string') {
+            return { prefix: 'fas', iconName: value }
+          }
+          return null
+        }
+      },
+
+      listItem: {
+        type: Boolean
+      },
+
+      pull: {
+        type: String
+      },
+
       pulse: {
-        type: Boolean,
+        type: Boolean
       },
-      scale: {
-        type: Number,
-      },
-      rotate: {
-        type: Number,
-      },
-      translateX: {
-        type: Number,
-      },
-      translateY: {
-        type: Number,
-      },
-      flipX: {
-        type: Boolean,
-      },
-      flipY: {
-        type: Boolean,
-      },
-      maskPrefix: {
-        type: String,
-      },
-      maskName: {
-        type: String,
-      },
-    };
-  }
 
-  async lazyLoading(fa) {
-    let icons;
-    switch (fa) {
-      case 'far':
-        icons = await import('@fortawesome/free-regular-svg-icons/index.es').then(
-          ({ far, prefix, ...listIcons }) => listIcons,
-        );
-        break;
-      case 'fab':
-        icons = await import('@fortawesome/free-brands-svg-icons/index.es').then(
-          ({ fab, prefix, ...listIcons }) => listIcons,
-        );
-        break;
-      case 'fas':
-        icons = await import('@fortawesome/free-solid-svg-icons/index.es').then(
-          ({ fas, prefix, ...listIcons }) => listIcons,
-        );
-        break;
-      default:
-        icons = await import('@fortawesome/free-solid-svg-icons/index.es').then(
-          ({ fas, prefix, ...listIcons }) => listIcons,
-        );
+      rotation: {
+        type: Number
+      },
+
+      size: {
+        type: String
+      },
+
+      spin: {
+        type: Boolean
+      },
+
+      symbol: {},
+
+      title: {
+        type: String
+      },
+
+      transform: {}
     }
-    library.add(icons);
   }
 
-  async renderIcon() {
+  get classList() {
     const {
-      prefix,
-      iconName,
-      maskName,
-      maskPrefix,
-      transform,
-      classes,
-      lazyLoading,
-    } = this;
-    await lazyLoading(prefix);
-
-    if (maskName) {
-      await lazyLoading(maskPrefix);
+      spin,
+      pulse,
+      fixedWidth,
+      inverse,
+      border,
+      listItem,
+      flip,
+      size,
+      rotation,
+      pull
+    } = this
+    const classes = {
+      'fa-spin': spin,
+      'fa-pulse': pulse,
+      'fa-fw': fixedWidth,
+      'fa-inverse': inverse,
+      'fa-border': border,
+      'fa-li': listItem,
+      'fa-flip-horizontal': flip === 'horizontal' || flip === 'both',
+      'fa-flip-vertical': flip === 'vertical' || flip === 'both',
+      [`fa-${size}`]: size !== null,
+      [`fa-rotate-${rotation}`]: rotation !== null,
+      [`fa-pull-${pull}`]: pull !== null
     }
 
-    return html(
-      icon(
-        {
-          prefix,
-          iconName,
-        },
-        {
-          transform,
-          classes,
-          mask: {
-            prefix: maskPrefix,
-            iconName: maskName,
-          },
-        },
-      ).html,
-    );
+    return Object.keys(classes)
+      .map(key => (classes[key] ? key : null))
+      .filter(key => key)
   }
 
-  get transform() {
-    const { scale, rotate, translateX, translateY, flipX, flipY } = this;
-    return {
-      size: (16 * scale) / 100,
-      rotate,
-      x: translateX,
-      y: translateY,
-      flipX,
-      flipY,
-    };
-  }
+  FontAwesomeIcon() {
+    const {
+      icon: iconLookup,
+      mask,
+      symbol,
+      className,
+      title,
+      classList,
+      transform
+    } = this
+    const renderedIcon = icon(iconLookup, {
+      classes: [...classList, ...className.split(' ')],
+      transform: typeof transform === 'string' ? parse.transform(transform) : transform,
+      mask,
+      symbol,
+      title
+    })
 
-  get classes() {
-    const { fixedWidth, pullLeft, pullRight, border, spin, pulse, size } = this;
-    return [
-      [fixedWidth, 'fa-fw'],
-      [pullLeft, 'fa-pull-left'],
-      [pullRight, 'fa-pull-right'],
-      [border, 'fa-border'],
-      [spin, 'fa-spin'],
-      [pulse, 'fa-pulse'],
-      [
-        [
-          'xs',
-          'sm',
-          'lg',
-          '2x',
-          '3x',
-          '4x',
-          '5x',
-          '6x',
-          '7x',
-          '8x',
-          '9x',
-          '10x',
-        ].includes(size),
-        `fa-${size}`,
-      ],
-    ].map(([condition, _class]) => (condition ? _class : null));
+    if (!renderedIcon) {
+      console.error('Could not find icon', iconLookup)
+      return null
+    }
+
+    return html(renderedIcon.html)
   }
 
   render() {
@@ -188,8 +179,9 @@ export default class extends LitElement {
           color: var(--icon-color, black);
           background-color: var(--icon-background-color, white);
         }
-      ${dom.css()}
+
+        ${dom.css()}
       </style>
-      ${this.renderIcon()}`;
+      ${this.FontAwesomeIcon()}`
   }
 }
