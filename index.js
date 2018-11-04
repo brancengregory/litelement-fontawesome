@@ -33,19 +33,7 @@ export default class extends LitElement {
       },
 
       mask: {
-        type: value => {
-          if (typeof value === 'object' && value.prefix && value.iconName) {
-            return value
-          }
-          if (Array.isArray(value) && value.length === 2) {
-            const [prefix, iconName] = value
-            return { prefix, iconName }
-          }
-          if (typeof value === 'string') {
-            return { prefix: 'fas', iconName: value }
-          }
-          return null
-        }
+        type: String
       },
 
       fixedWidth: {
@@ -61,19 +49,7 @@ export default class extends LitElement {
       },
 
       icon: {
-        type: value => {
-          if (typeof value === 'object' && value.prefix && value.iconName) {
-            return value
-          }
-          if (Array.isArray(value) && value.length === 2) {
-            const [prefix, iconName] = value
-            return { prefix, iconName }
-          }
-          if (typeof value === 'string') {
-            return { prefix: 'fas', iconName: value }
-          }
-          return null
-        }
+        type: String
       },
 
       listItem: {
@@ -142,6 +118,23 @@ export default class extends LitElement {
       .filter(key => key)
   }
 
+  normalizeArgs(value) {
+    if (value == null) {
+      return null
+    }
+    if (typeof value === 'object' && value.prefix && value.iconName) {
+      return value
+    }
+    if (Array.isArray(value) && value.length === 2) {
+      const [prefix, iconName] = value
+      return { prefix, iconName }
+    }
+    if (typeof value === 'string') {
+      return { prefix: 'fas', iconName: value }
+    }
+    return null
+  }
+
   FontAwesomeIcon() {
     const {
       icon: iconLookup,
@@ -150,18 +143,19 @@ export default class extends LitElement {
       className,
       title,
       classList,
-      transform
+      transform,
+      normalizeArgs
     } = this
-    const renderedIcon = icon(iconLookup, {
+    const renderedIcon = icon(normalizeArgs(iconLookup), {
       classes: [...classList, ...className.split(' ')],
       transform: typeof transform === 'string' ? parse.transform(transform) : transform,
-      mask,
+      mask: normalizeArgs(mask),
       symbol,
       title
     })
 
     if (!renderedIcon) {
-      console.error('Could not find icon', iconLookup)
+      console.error('Could not find icon', normalizeArgs(iconLookup))
       return null
     }
 

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script type="module">
+    import { LitElement, html } from '@polymer/lit-element'
+    import icon from "./index.js";
+    import { faHeart as fasHeart } from "./node_modules/@fortawesome/free-solid-svg-icons";
+    import { faHeart as farHeart } from "./node_modules/@fortawesome/free-regular-svg-icons";
+    import { faFacebook } from "./node_modules/@fortawesome/free-brands-svg-icons";
+    import { library } from '@fortawesome/fontawesome-svg-core'
+
+    library.add(faFacebook, fasHeart, farHeart, faFacebook)
+
+    customElements.define('my-icon', icon)
+
+    class myElement extends LitElement {
+      render() {
+        return html`
+        <my-icon icon="heart"></my-icon>
+        <my-icon .icon="${["far", "heart"]}"></my-icon>
+        <my-icon .icon="${faFacebook}"></my-icon>`
+      }
+    }
+
+    customElements.define('my-element', myElement)
+  </script>
+</head>
+
+<body>
+  <my-element></my-element>
+  <my-icon icon="heart"></my-icon>
+</body>
+
+</html>
