@@ -1,7 +1,8 @@
+/* eslint-disable no-undef */
 import { LitElement, html } from '@polymer/lit-element'
 import { icon, dom, parse } from '@fortawesome/fontawesome-svg-core'
 
-export default class extends LitElement {
+class FontAwesomeIcon extends LitElement {
   constructor() {
     super()
     this.border = false
@@ -179,3 +180,5 @@ export default class extends LitElement {
       ${this.FontAwesomeIcon()}`
   }
 }
+
+customElements.define('fontawesome-icon', FontAwesomeIcon)

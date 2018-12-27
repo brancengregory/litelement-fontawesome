@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script type="module">
     import { LitElement, html } from '@polymer/lit-element'
-    import icon from "./index.js";
+    import "./index.js";
     import { faHeart as fasHeart } from "./node_modules/@fortawesome/free-solid-svg-icons";
     import { faHeart as farHeart } from "./node_modules/@fortawesome/free-regular-svg-icons";
     import { faFacebook } from "./node_modules/@fortawesome/free-brands-svg-icons";
@@ -16,14 +16,12 @@
 
     library.add(faFacebook, fasHeart, farHeart, faFacebook)
 
-    customElements.define('my-icon', icon)
-
     class myElement extends LitElement {
       render() {
         return html`
-        <my-icon icon="heart"></my-icon>
-        <my-icon .icon="${["far", "heart"]}"></my-icon>
-        <my-icon .icon="${faFacebook}"></my-icon>`
+        <fontawesome-icon icon="heart"></fontawesome-icon>
+        <fontawesome-icon .icon="${["far", "heart"]}"></fontawesome-icon>
+        <fontawesome-icon .icon="${faFacebook}"></fontawesome-icon>`
       }
     }
 
@@ -33,7 +31,7 @@
 
 <body>
   <my-element></my-element>
-  <my-icon icon="heart"></my-icon>
+  <fontawesome-icon icon="heart"></fontawesome-icon>
 </body>
 
 </html>
